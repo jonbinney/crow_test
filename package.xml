@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>crow_test</name>
+  <version>0.0.0</version>
+  <description>The crow_test package</description>
+
+  <maintainer email="jbinney@todo.todo">jbinney</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+</package>
