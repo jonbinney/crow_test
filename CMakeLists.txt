@@ -5,6 +5,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
 )
 
+find_package(Boost REQUIRED COMPONENTS system thread)
+
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES crow_test
@@ -13,20 +15,23 @@ catkin_package(
 )
 
 include_directories(
+  crow
+  crow/http-parser
   ${catkin_INCLUDE_DIRS}
 )
 
+# Build http-parserlib
+add_library(http-parser crow/http-parser/http_parser.c)
+
 ## Declare a cpp executable
-# add_executable(crow_test_node src/crow_test_node.cpp)
+add_executable(crow_test_node src/crow_test_node.cpp)
+set_target_properties(crow_test_node PROPERTIES COMPILE_FLAGS -std=c++11)
+target_link_libraries(crow_test_node http-parser ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(crow_test_node crow_test_generate_messages_cpp)
 
-## Specify libraries to link a library or executable target against
-# target_link_libraries(crow_test_node
-#   ${catkin_LIBRARIES}
-# )
 
 #############
 ## Install ##
